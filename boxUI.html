@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>div 동적인 생성과 삭제</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css
+  ">
+  <style>
+    .ui {
+      width: 800px;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      background-color: rgb(225, 236, 255);
+      border: 1px solid rgb(157, 188, 255);
+    }
+
+    button {
+      background-color: rgb(18, 45, 198);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      width: 80px;
+      height: 30px;
+    }
+
+    button:hover {
+      background-color: rgb(127, 148, 255);
+      cursor: pointer;
+    }
+
+    .ui>button {
+      width: 30px;
+    }
+
+    p {
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="alert alert-primary">
+    <p><strong>Lorem ipsum dolor sit amet.</strong> Totam, corporis recusandae optio qui quis illo quo aspernatur.</p>
+    <button class="btn-close"></button>
+  </div>
+  <button class="btn-create">click</button>
+</body>
+<script>
+  let boxArr = ['alert-primary', 'alert-warning', 'alert-danger'];
+
+  const closeBtn = document.querySelector(".alert").querySelector('.btn-close');
+    closeBtn.addEventListener('click', function() {
+      this.parentNode.remove()
+    })
+
+  function createBlock() {
+    let blocks = document.querySelectorAll('.alert');
+    const modelDiv = blocks[0];
+    const newDiv = modelDiv.cloneNode(true); // 깊은 복사
+    const closeBtn = newDiv.querySelector('.btn-close');
+    closeBtn.addEventListener('click', function() {
+      this.parentNode.remove()
+    })
+    let num = blocks.length % 3;
+    newDiv.classList.remove(newDiv.classList[1]);
+    newDiv.classList.add(boxArr[num]);    
+    document.body.prepend(newDiv);
+  }
+
+  const createBtn = document.querySelector('.btn-create');
+  createBtn.addEventListener('click', createBlock)
+</script>
+
+</html>
