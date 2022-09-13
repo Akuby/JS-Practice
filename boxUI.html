@@ -21,22 +21,24 @@
   <button class="btn-create btn btn-danger">새로 만들기</button>
 </body>
 <script>
-  let boxArr = ['alert-primary', 'alert-warning', 'alert-danger'];
+  let boxArr = ['alert-primary', 'alert-warning', 'alert-danger']; // div 배경 바꿔줄 class들의 배열
 
-  const closeBtn = document.querySelector(".alert").querySelector('.btn-close');
+  (function closeBtn() {
+    const closeBtn = document.querySelector(".alert").querySelector('.btn-close');
     closeBtn.addEventListener('click', function() {
       this.parentNode.remove()
     })
+  })()
 
   function createBlock() {
     let blocks = document.querySelectorAll('.alert');
+    let num = blocks.length % 3;
     const modelDiv = blocks[0];
     const newDiv = modelDiv.cloneNode(true); // 깊은 복사
     const closeBtn = newDiv.querySelector('.btn-close');
     closeBtn.addEventListener('click', function() {
       this.parentNode.remove()
     })
-    let num = blocks.length % 3;
     newDiv.classList.remove(newDiv.classList[1]);
     newDiv.classList.add(boxArr[num]);    
     document.body.prepend(newDiv);
