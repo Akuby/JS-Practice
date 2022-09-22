@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form과 if문</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css
+  ">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <style>
+    body {
+      padding: 30px;
+    }
+
+    .landing {
+      text-align: center;
+    }
+
+    .form-bg {
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      visibility: hidden;
+    }
+
+    .show {
+      visibility: visible;
+    }
+
+    form {
+      width: 800px;
+      margin: 150px auto 0;
+      background-color: #fff;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="landing">
+    <h1>Welcome!</h1>
+    <p>press this button to log-in</p>
+    <button class="btn btn-primary" id="open">log-in</button>
+  </div>
+  <div class="form-bg">
+    <form action="./success.html">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="check">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-danger" id="close">닫기</button>
+    </form>
+  </div>
+</body>
+<script>
+  $('#open').on('click', function () {
+    $('.form-bg').addClass('show');
+  })
+  $('#close').on('click', function () {
+    $('.form-bg').removeClass('show');
+  })
+
+  // 전송 버튼 클릭 시, input이 비었을 경우 알림창 띄우기
+  $('form').on('submit', function (e) {
+      if ($('#inputEmail').val() == "") {
+        alert('please put your email');
+        e.preventDefault();
+      } else if ($('#inputPassword').val() == "") {
+        alert('please put your password');
+        e.preventDefault();
+      } else if ($('#check').is(':checked') == false) {
+        alert('please check the condition');
+        e.preventDefault();
+      }
+  })
+</script>
+
+</html>
