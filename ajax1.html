@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ajax</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css
+">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <button id="get">눌러서 get</button>
+  <button id="post">눌러서 post</button>
+  <h1 id="getResult"></h1>
+  <script>
+    const getBtn = document.getElementById('get');
+    const postBtn = document.getElementById('post');
+    const h1 = document.getElementById('getResult');
+    getBtn.addEventListener('click', function() {
+      // jQuery 버전
+      $.get('https://codingapple1.github.io/price.json') // jquery는 get() 사용 시 자동으로 json 변환 해준다
+       .then(function(data) {
+        h1.innerHTML = data.price;
+      })
+      .catch(function() {
+        h1.innerHTML = 'connection failed'
+      })
+    })
+    // postBtn.addEventListener('click', function() {
+    //   $.post('https://codingapple1.github.io/hello.txt', {name : 'hello'})
+    // })
+
+    // JS 버전
+    fetch('https://codingapple1.github.io/price.json')
+    .then(res => res.json()) // 받아온 json을 object로 바꿔준다!
+    .then(function(data) {
+        h1.innerHTML = data.price;
+      })
+    .catch(err => {
+      console.log(err)
+    })
+  </script>
+</body>
+</html>
